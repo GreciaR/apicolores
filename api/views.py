@@ -4,7 +4,7 @@ from django.views.generic import View
 from django.views.decorators.csrf import csrf_exempt
 import json
 from .models import Color
-
+from .forms import ColorForm
 
 # Create your views here.
 
@@ -82,8 +82,33 @@ class ColorsView(View):
             my_colorsjson = {'colors' : list_colors}
             return HttpResponse(json.dumps(my_colorsjson), content_type='application/json')
 
+class Home(View):
+    def get(self,request):
+        template_name='formulario.html'
+        form = ColorForm()
+        context={
+        'form': form
+        }
+        return render (request, template_name, context)
 
+    def post(self, request):
+        color = ColorForm(request.POST)
+        if color.is_valid(): 
+            color = color.save()
+            return HttpResponse("OK")
+        else:
+            return HttpResponse("esta mal")
 
+class Paleta(View):
+    def get(self, request):
+        template_name='paleta.html'
+        form = PaletaForm()
+        context={
+        'form': form
+        }
+        return render (request, template_name, context)
 
+    def porst(self, request):
+        paleta = paleta.save
 
 

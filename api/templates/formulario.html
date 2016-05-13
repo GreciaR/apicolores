@@ -1,0 +1,11 @@
+{%block content%}
+
+<section class="container">
+	<form action="." method="post">
+	{%csrf_token%}
+	{{form.as_p}}
+	<input id="boton" type="submit" value="registrar"> </input>
+	</form>
+</section>
+
+{%endblock content%}
